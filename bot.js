@@ -3,7 +3,7 @@
 var login = require("facebook-chat-api");
 const _ = require("underscore");
 var config = require("./config")
-
+var commands = [];
 login({email: config.fbemail, password: config.password}, function callback (err, api) {
     if(err) return console.error(err);
 

@@ -40,7 +40,7 @@ module.exports.handler = (api, args, message) => {
 	.catch(function (err) {
 	  console.error(err);
 	});
-
+}
 };
 
 
