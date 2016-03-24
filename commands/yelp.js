@@ -31,7 +31,7 @@ module.exports.handler = (api, args, message) => {
   } else {
   	let zip = args[0];
   	args.shift()
-  	cuisine = args.join(' ');
+  	let cuisine = args.join(' ');
   	console.log(zip, cuisine);
   	yelp.search({ term: cuisine, location: zip})
 	.then(function (data) {

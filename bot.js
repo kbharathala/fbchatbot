@@ -9,8 +9,8 @@ login({email: config.fbemail, password: config.password}, function callback (err
 
     api.listen(function callback(err, message) {
     	if(message.type === 'message' && message.body.charAt(0) === '/') {
-    		args = message.body.substring(1).split(' ');
-    		cmd = args[0];
+    		let args = message.body.substring(1).split(' ');
+    		let cmd = args[0];
     		args.shift();
 
     		let valid = false;
