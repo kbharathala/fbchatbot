@@ -12,32 +12,65 @@ var yelp = new Yelp({
 
 module.exports.command = 'yelp';
 
-module.exports.usage = '<zipcode, cuisine>';
-module.exports.description = 'gets food in the area by zipcode. default: food';
+module.exports.usage = '<command, zipcode, cuisine>';
+module.exports.description = '';
 
 module.exports.handler = (api, args, message) => {
 
-  if(args.length < 1) {
-  	api.sendMessage("What's your zipcode?", message.threadID);
-  } else if(args.length == 1) {
-    	yelp.search({ term: 'food', location: args[0] })
-  	.then(function (data) {
-      api.sendMessage(data.businesses[0].name, message.threadID);
-  	})
-  	.catch(function (err) {
-  	  api.sendMessage("Sorry. There are no results for that entry", message.threadID);
-  	});
+  if(args.length <= 1) {
+  	api.sendMessage("<command, zipcode, cuisine>", message.threadID);
+  } else if(args.length == 2) {
+      yelp.search({ term: 'food', location: args[0], sort: 2 })
+      .then(function (data) {
+        let restaurants = [];
+        console.log(data.businesses);
+        for(var i = 0; i < data.businesses.length; i++) {
+          console.log(data.businesses[i].name);
+          restaurants.push(data.businesses[i].name);
+        }
+        if(args[0] == 'search') {
+          api.sendMessage(restaurants.slice(0,10).join(", "), message.threadID);
+        } else if(args[0] == 'random') {
+          var randomInt = Math.floor(Math.random()*10);
+          console.log(randomInt);
+          api.sendMessage(restaurants[randomInt], message.threadID);
+        } else {
+          api.sendMessage('Invalid command', message.threadID);
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+        api.sendMessage("Sorry. There are no results for that entry", message.threadID);
+      });
   } else {
-  	let zip = args[0];
-  	args.shift()
+  	let cmd = args[0];
+    let zip = args[1];
+  	args.shift();
+    args.shift();
   	let cuisine = args.join(' ');
-  	yelp.search({ term: cuisine, location: zip})
-  	.then(function (data) {
-      api.sendMessage(data.businesses[0].name, message.threadID);
-  	})
-  	.catch(function (err) {
-  	  api.sendMessage("Sorry. There are no results for that entry", message.threadID);
-  	});
+    console.log(cuisine);
+  	yelp.search({ term: cuisine, location: zip, sort: 2 })
+      .then(function (data) {
+        let restaurants = [];
+        console.log(data.businesses);
+        for(var i = 0; i < data.businesses.length; i++) {
+          console.log(data.businesses[i].name);
+          restaurants.push(data.businesses[i].name);
+        }
+        if(cmd == 'search') {
+          api.sendMessage(restaurants.slice(0,10).join(", "), message.threadID);
+        } else if(cmd == 'random') {
+          var randomInt = Math.floor(Math.random()*10);
+          console.log(randomInt);
+          api.sendMessage(restaurants[randomInt], message.threadID);
+        } else {
+          api.sendMessage('Invalid command', message.threadID);
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+        api.sendMessage("Sorry. There are no results for that entry", message.threadID);
+      });
   }
 };
 
