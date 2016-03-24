@@ -20,25 +20,23 @@ module.exports.handler = (api, args, message) => {
   if(args.length < 1) {
   	api.sendMessage("What's your zipcode?", message.threadID);
   } else if(args.length == 1) {
-  	console.log(args[0]);
   	yelp.search({ term: 'food', location: args[0] })
 	.then(function (data) {
-	  console.log(data);
+    api.sendMessage(data.businesses[0].name, message.threadID);
 	})
 	.catch(function (err) {
-	  console.error(err);
+	  api.sendMessage("Sorry. There are no results for that entry", message.threadID);
 	});
   } else {
   	let zip = args[0];
   	args.shift()
   	let cuisine = args.join(' ');
-  	console.log(zip, cuisine);
   	yelp.search({ term: cuisine, location: zip})
 	.then(function (data) {
-	  console.log(data);
+    api.sendMessage(data.businesses[0].name, message.threadID);
 	})
 	.catch(function (err) {
-	  console.error(err);
+	  api.sendMessage("Sorry. There are no results for that entry", message.threadID);
 	});
 }
 };
