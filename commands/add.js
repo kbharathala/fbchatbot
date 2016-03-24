@@ -4,6 +4,7 @@ module.exports.command = 'add';
 module.exports.usage = '<name>';
 module.exports.description = 'adds someone to the conversation';
 module.exports.handler = (api, args, message) => {
+	console.log(message);
 	if(args.length == 2 && message.threadName === ''){
 		wrapper.addPerson(api, args[0] + ' ' + args[1], message.threadID);
 	}
