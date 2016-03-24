@@ -2,13 +2,10 @@
   "name": "fbchatbot",
   "version": "1.0.0",
   "description": "Facebook Chatbot",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "main.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kbharathala/fbchatbot.git"
+    "url": "https://github.com/kbharathala/fbchatbot"
   },
   "author": "Krishna Bharathala & Amit Patel",
   "license": "MIT",
@@ -21,6 +18,5 @@
     "mongodb": "^2.1.3",
     "safe-eval": "^0.2.0",
     "underscore": "^1.8.3"
-  },
-  "homepage": "https://github.com/kbharathala/fbchatbot#readme"
+  }
 }
