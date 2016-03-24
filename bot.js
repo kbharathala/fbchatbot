@@ -1,3 +1,5 @@
+'use strict';
+
 var login = require("facebook-chat-api");
 const _ = require("underscore");
 var config = require("./config")
