@@ -4,6 +4,7 @@ var login = require("facebook-chat-api");
 const _ = require("underscore");
 var config = require("./config")
 var commands = [];
+var utils = new Array()  ;
 login({email: config.fbemail, password: config.password}, function callback (err, api) {
     if(err) return console.error(err);
 
@@ -35,3 +36,9 @@ module.exports.addCommand = (command, handler) => {
     console.error(`Invalid command. ${handler} is not a function`);
   }
 };
+
+module.exports.addUtil = (util) => {
+    if(util.name){
+        utils[util.name] = util;
+    }
+}

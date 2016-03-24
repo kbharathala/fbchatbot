@@ -5,7 +5,6 @@ const fs = require('fs')
 const path = require('path')
 
 var commandsPath = path.join(__dirname, 'commands');
-
 var commandsFiles = fs.readdirSync(commandsPath); 
 commandsFiles.forEach( function(filename) {
 		let fileparts = filename.split('.'); 
@@ -18,5 +17,16 @@ commandsFiles.forEach( function(filename) {
 		}
 
 	});
-
+var utilsPath = path.join(__dirname, 'utilities');
+var utilFiles = fs.readdirSync(utilsPath); 
+utilFiles.forEach( function(filename) {
+		let fileparts = filename.split('.'); 
+		let type = fileparts[fileparts.length -1];
+		if(type === "js"){
+			let util = require("./utilities/" + filename);
+			if(util.name && _.isFunction(util.information)){
+				bot.addUtil(util);
+			}
+		}
+	});
  
