@@ -6,5 +6,11 @@ login({email: "jarcortana@gmail.com", password: "cortanaJ"}, function callback (
 
     api.listen(function callback(err, message) {
         api.sendMessage(message.body, message.threadID);
+        api.getFriendsList(function(err, data) {
+			if(err) return console.error(err);
+			api.sendMessage(data[1].profileUrl, message.threadID);
+		});
     });
+
+
 });
