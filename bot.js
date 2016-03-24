@@ -1,11 +1,7 @@
 var login = require("facebook-chat-api");
+const _ = require("underscore");
 var config = require("./config")
 
-
-// commands dictionary 
-
-
-// Create simple echo bot
 login({email: config.fbemail, password: config.password}, function callback (err, api) {
     if(err) return console.error(err);
 
@@ -28,6 +24,12 @@ login({email: config.fbemail, password: config.password}, function callback (err
         	}
         }
     });
-
-
 });
+
+module.exports.addCommand = (command, handler) => {
+  if(_.isFunction(handler)) {
+    commands.push({cmd: command, handler: handler});
+  } else {
+    console.error(`Invalid command. ${handler} is not a function`);
+  }
+};
