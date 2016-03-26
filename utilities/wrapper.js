@@ -22,9 +22,9 @@ module.exports.removePerson = function(api, name, threadID){
 	});
 }
 
-module.exports.getPersonData = function(api, name){
+module.exports.getPersonData = function(api, name, callback){
 	api.getUserID(name, function(err, data){
 		if(err) return console.error(err);
-		return data;
+		callback(api, data);
 	});
 }
