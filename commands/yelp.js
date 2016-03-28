@@ -23,16 +23,13 @@ module.exports.handler = (api, args, message) => {
       yelp.search({ term: 'food', location: args[0], sort: 2 })
       .then(function (data) {
         let restaurants = [];
-        console.log(data.businesses);
         for(var i = 0; i < data.businesses.length; i++) {
-          console.log(data.businesses[i].name);
           restaurants.push(data.businesses[i].name);
         }
         if(args[0] == 'search') {
           api.sendMessage(restaurants.slice(0,10).join(", "), message.threadID);
         } else if(args[0] == 'random') {
           var randomInt = Math.floor(Math.random()*10);
-          console.log(randomInt);
           api.sendMessage(restaurants[randomInt], message.threadID);
         } else {
           api.sendMessage('Invalid command', message.threadID);
@@ -48,20 +45,16 @@ module.exports.handler = (api, args, message) => {
   	args.shift();
     args.shift();
   	let cuisine = args.join(' ');
-    console.log(cuisine);
   	yelp.search({ term: cuisine, location: zip, sort: 2 })
       .then(function (data) {
         let restaurants = [];
-        console.log(data.businesses);
         for(var i = 0; i < data.businesses.length; i++) {
-          console.log(data.businesses[i].name);
           restaurants.push(data.businesses[i].name);
         }
         if(cmd == 'search') {
           api.sendMessage(restaurants.slice(0,10).join(", "), message.threadID);
         } else if(cmd == 'random') {
           var randomInt = Math.floor(Math.random()*10);
-          console.log(randomInt);
           api.sendMessage(restaurants[randomInt], message.threadID);
         } else {
           api.sendMessage('Invalid command', message.threadID);
