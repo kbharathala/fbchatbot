@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 
 var request = require('request');
 const fs = require('fs');
@@ -35,7 +35,7 @@ module.exports.handler = (api, args, message) => {
 		      body: "",
 		      attachment: fs.createReadStream(__dirname + '/../giphy.gif')
 		    }
-		    api.sendMessage(msg, message.threadID); 
+		    api.sendMessage(msg, message.threadID); 	
 		});
 
 	  } else {
