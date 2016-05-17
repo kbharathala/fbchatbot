@@ -16,7 +16,7 @@ commandsFiles.forEach( function(filename) {
 			}
 		}
 
-	});
+});
 var utilsPath = path.join(__dirname, 'utilities');
 var utilFiles = fs.readdirSync(utilsPath); 
 utilFiles.forEach( function(filename) {
@@ -28,5 +28,5 @@ utilFiles.forEach( function(filename) {
 				bot.addUtil(util);
 			}
 		}
-	});
+});
  
