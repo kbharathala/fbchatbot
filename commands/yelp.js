@@ -15,6 +15,25 @@ module.exports.command = 'yelp';
 module.exports.usage = '<command, zipcode, cuisine>';
 module.exports.description = '';
 
+
+module.exports.wit = (term, place, context, callback) => {
+  yelp.search({ term: term, location: place, sort: 2 })
+      .then(function (data) {
+        var restaurants = [];
+        for(var i = 0; i < data.businesses.length; i++) {
+          restaurants.push(data.businesses[i].name);
+        }
+        context['suggestions'] =  restaurants.slice(0,10).join(", ");
+        callback(context); 
+      })
+      .catch(function (err) {
+        console.log(err);
+        context['suggestions'] =  "Sorry. There are no results for that entry";
+        callback(context);
+      });
+     
+};
+
 module.exports.handler = (event, callback) => {
   var text = event.message.text;
   var args = text.substring(1).split(' ');
